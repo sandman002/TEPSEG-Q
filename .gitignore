@@ -1,0 +1,5 @@
+dist/
+__pycache__/
+*.pyc
+qupath-extension-tepseg/build/
+qupath-extension-tepseg/.gradle/
