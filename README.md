@@ -78,20 +78,7 @@ On an RTX 4090:
 
 UNI2-h (ViT-giant, 1.1 B parameters) runs in fp16 at about 340 fields/s and sets the pace. Worker processes read the slide in wide bands at the model's resolution while the GPU works. Tiled-JPEG SVS tiles are decoded straight at half size. Fast mode reads only the scored fields. Loading UNI2-h takes about 20 s once per run.
 
-## Model and validation
 
-- **Fields:** 256 px at 20× (128 µm), resized to 224 px for UNI2-h, as in training.
-- **Head:** a 3-layer MLP on UNI2-h's 1,536-dimensional features: tumour epithelium vs everything else.
-- **Regions:** the probability map is smoothed and thresholded inside the tissue (saturated, not bright). Small islands are removed, small holes filled, and contours smoothed by corner cutting.
-- **Agreement with the original TEPSEG pipeline** on three slides, on the same grid:
-
-  | | |
-  |---|---|
-  | field probabilities, correlation | 0.990–0.996 |
-  | tumour / non-tumour calls, agreement | 98.6–99.9% |
-  | region overlap (IoU) | 0.87–0.92 |
-
-  The region overlap differs only through post-processing. Slides with very little tumour are more sensitive (IoU 0.49 at 2 mm² of tumour).
 
 ## License
 
